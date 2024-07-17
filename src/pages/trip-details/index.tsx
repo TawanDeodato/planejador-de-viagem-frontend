@@ -1,21 +1,31 @@
-import { Plus } from "lucide-react";
+import { Plus, UserCog } from "lucide-react";
 import { useState } from "react";
 import { CreateActivityModal } from "./create-activity-modal";
 import { ImportantLinks } from "./important-links";
 import { Guests } from "./guests";
 import { Activities } from "./activities";
 import { DestinationAndDateHeader } from "./destination-and-date-header";
+import { CreateLinksModal } from "./create-links-modal";
+import { Button } from "../../components/button";
 
 export function TripDetailsPage() {
-    const [isCreateActivityModalOpen, setIsCreateActivityModalOpen] = useState(false)
 
+    const [isCreateActivityModalOpen, setIsCreateActivityModalOpen] = useState(false)
+    const [isCreateLinksModalOpen, setIsCreateLinksModalOpen] = useState(false)
+
+
+    function openCreateLinksModal() {
+        setIsCreateLinksModalOpen(true)
+    }   
+    function closeCreateLinksModal() {
+        setIsCreateLinksModalOpen(false)
+    } 
     function openCreateActivityModal() {
         setIsCreateActivityModalOpen(true)
     } 
     function closeCreateActivityModal() {
         setIsCreateActivityModalOpen(false)
-    } 
-     
+    }  
 
     return (
         <div className="max-w-6xl px-24 py-10 mx-auto space-y-8">
@@ -37,7 +47,11 @@ export function TripDetailsPage() {
 
                     <div className="w-80 space-y-6">
                         <ImportantLinks />
-
+                        <Button onClick={openCreateLinksModal} variant="secondary" size="full">
+                            <Plus className="size-5"/>
+                            Cadastrar novo link
+                        </Button>
+            
                         <div className="w-full h-px bg-zinc-800" />
 
                         <Guests />
@@ -47,6 +61,9 @@ export function TripDetailsPage() {
             {isCreateActivityModalOpen && (
                 <CreateActivityModal closeCreateActivityModal={closeCreateActivityModal} />
             )} 
+            {isCreateLinksModalOpen && (
+                <CreateLinksModal closeCreateLinksModal={closeCreateLinksModal} />
+            )}
         </div>
     )
 }

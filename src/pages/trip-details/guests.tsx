@@ -44,10 +44,10 @@ export function Guests() {
             </div>
           );
         })}
-      </div>
+      </div>    
       <Button variant="secondary" size="full">
-        <UserCog className="size-5" />
-        Gerenciar convidados
+          <UserCog className="size-5" />
+          Gerenciar convidados
       </Button>
     </div>
   );

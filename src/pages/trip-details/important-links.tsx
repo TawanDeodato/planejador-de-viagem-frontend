@@ -1,34 +1,40 @@
-import { Link2, Plus } from "lucide-react";
-import { Button } from "../../components/button";
+import { Link2} from "lucide-react";
+import { useEffect, useState } from "react";
+import { api } from "../../lib/axios";
+import { useParams } from "react-router-dom";
+
+interface Links {
+    date: string
+    id: string;
+    title: string;
+    url: string;
+  }
 
 export function ImportantLinks() {
+    const { tripId } = useParams();
+  const [links, setLinks] = useState<Links[]>([]);
+
+  useEffect(() => {
+    api
+      .get(`/trips/${tripId}/links`)
+      .then((response) => setLinks(response.data.links));
+  }, [tripId]);
+
     return (
         <div className="space-y-6">
-            <h2 className="font-semibold text-xl">Links importantes</h2>
-            <div className="space-y-5">
-                <div className="flex items-center justify-between gap-4">
-                    <div className="space-y-1.5">
-                        <span className="block font-medium texxt-zinc-100">Reserva AirBnB</span>
-                        <a href="https://www.airbnb.com.br/rooms/104700011" target="_blank" className="text-xs text-zinc-400 truncate hover:text-zinc-200">
-                            https://www.airbnb.com.br/rooms/104700011
-                        </a>
+            {links.map((category) => {
+                return(
+                    <div key={category.date} className="flex items-center justify-between gap-4">
+                        <div className="space-y-1.5">
+                            <span className="block font-medium texxt-zinc-100">{category.title}</span>
+                            <a href={category.url} target="_blank" className="text-xs text-zinc-400 truncate hover:text-zinc-200">
+                                {category.url}
+                            </a>
+                        </div>
+                        <Link2 className="text-zinc-400 size-5 shrink-0"/>
                     </div>
-                    <Link2 className="text-zinc-400 size-5 shrink-0"/>
-                </div>
-                <div className="flex items-center justify-between gap-4">
-                    <div className="space-y-1.5">
-                        <span className="block font-medium texxt-zinc-100">Regras da casa</span>
-                        <a href="https://www.notion.com/pages/104700011" target="_blank" className="text-xs text-zinc-400 truncate hover:text-zinc-200">
-                            https://www.notion.com/pages/104700011
-                        </a>
-                    </div>
-                    <Link2 className="text-zinc-400 size-5 shrink-0"/>
-                </div>
-            </div>
-            <Button variant="secondary" size="full">
-                <Plus className="size-5"/>
-                Cadastrar novo link
-            </Button>
+                )
+            })}
         </div>
     )
 }
