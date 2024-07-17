@@ -1,6 +1,7 @@
 import { Plus, UserCog } from "lucide-react";
 import { useState } from "react";
 import { CreateActivityModal } from "./create-activity-modal";
+import { AddSomeoneModal, InviteSomeone } from "./invite-someone";
 import { ImportantLinks } from "./important-links";
 import { Guests } from "./guests";
 import { Activities } from "./activities";
@@ -12,8 +13,15 @@ export function TripDetailsPage() {
 
     const [isCreateActivityModalOpen, setIsCreateActivityModalOpen] = useState(false)
     const [isCreateLinksModalOpen, setIsCreateLinksModalOpen] = useState(false)
+    const [isAddSomeoneModalopen, setAddSomeoneModalOpen] = useState(false)
 
 
+    function openInveteGuestsModal() {
+        setAddSomeoneModalOpen(true)
+    }   
+    function closeInviteSomeoneModal() {
+        setAddSomeoneModalOpen(false)
+    }    
     function openCreateLinksModal() {
         setIsCreateLinksModalOpen(true)
     }   
@@ -55,6 +63,10 @@ export function TripDetailsPage() {
                         <div className="w-full h-px bg-zinc-800" />
 
                         <Guests />
+                        <Button onClick={openInveteGuestsModal} variant="secondary" size="full">
+                            <UserCog className="size-5" />
+                            Gerenciar convidados
+                        </Button>
                     </div>
             </main>
 
@@ -63,6 +75,9 @@ export function TripDetailsPage() {
             )} 
             {isCreateLinksModalOpen && (
                 <CreateLinksModal closeCreateLinksModal={closeCreateLinksModal} />
+            )}
+            {isAddSomeoneModalopen && (
+                <AddSomeoneModal closeInviteSomeoneModal={closeInviteSomeoneModal} />
             )}
         </div>
     )

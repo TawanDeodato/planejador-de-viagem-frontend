@@ -1,5 +1,4 @@
-import { CheckCircle2, CircleDashed, UserCog } from "lucide-react";
-import { Button } from "../../components/button";
+import { CheckCircle2, CircleDashed } from "lucide-react";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { api } from "../../lib/axios";
@@ -45,10 +44,6 @@ export function Guests() {
           );
         })}
       </div>    
-      <Button variant="secondary" size="full">
-          <UserCog className="size-5" />
-          Gerenciar convidados
-      </Button>
     </div>
   );
 }
