@@ -1,7 +1,7 @@
 import { Plus, UserCog } from "lucide-react";
 import { useState } from "react";
 import { CreateActivityModal } from "./create-activity-modal";
-import { AddSomeoneModal, InviteSomeone } from "./invite-someone";
+import { AddSomeoneModal } from "./invite-someone";
 import { ImportantLinks } from "./important-links";
 import { Guests } from "./guests";
 import { Activities } from "./activities";
